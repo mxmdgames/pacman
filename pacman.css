@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-
+/* =============================================
+   YOUR ORIGINAL STYLES — UNTOUCHED
+   ============================================= */
 
 body {
     margin: 0;
@@ -19,23 +21,20 @@ body {
     min-width: 340px;
 }
 
-/* On iPhone and other small phones the container was shrinking via 95vw
-   to a size where the machine image became too small for the board to fit
-   inside it. Force a larger fixed width at the breakpoints where this
-   happens so the machine and board always stay in proportion. */
-@media (max-width: 480px) {
-    #arcade-container {
-        width: 480px;
-        max-width: none;
-        min-width: 480px;
+/* On touch devices the machine image must overflow the viewport so it
+   stays proportionally large enough to frame the board correctly.
+   700px is wide enough for the board to sit cleanly inside the machine
+   graphic on all current iPhone sizes. overflow:hidden on html clips the
+   bleed without adding scrollbars. */
+@media (pointer: coarse) {
+    html, body {
+        overflow: hidden;
     }
-}
 
-@media (max-width: 390px) {
     #arcade-container {
-        width: 420px;
+        width: 700px;
         max-width: none;
-        min-width: 420px;
+        min-width: 700px;
     }
 }
 
