@@ -18,6 +18,10 @@ body {
     position: relative;
     width: 900px;
     max-width: 95vw;
+    /* On narrow screens the machine was shrinking too small relative to the
+       board. min-width keeps the machine large enough that the board's
+       percentage-based positioning always sits correctly inside it. */
+    min-width: 340px;
 }
 
 #arcade-machine {
