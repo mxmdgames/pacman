@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pac-Man Arcade</title>
+<link rel="stylesheet" href="pacman.css">
+</head>
+<body>
+
+<!-- Scrolling top banner -->
+<div class="marquee-banner">
+    <div class="marquee-track">
+        <span class="marquee-text">⬤ PAC-MAN ⬤ HIGH SCORE ⬤ NO COIN ⬤ 1 PLAYER ⬤ KIM MXMD ⬤ PAC-MAN ⬤ HIGH SCORE ⬤ NO COIN ⬤ 1 PLAYER ⬤ KIM MXMD ⬤ PAC-MAN ⬤ HIGH SCORE ⬤ NO COIN ⬤ 1 PLAYER ⬤ KIM MXMD ⬤</span>
+        <span class="marquee-text" aria-hidden="true">⬤ PAC-MAN ⬤ HIGH SCORE ⬤ NO COIN ⬤ 1 PLAYER ⬤ KIM MXMD ⬤ PAC-MAN ⬤ HIGH SCORE ⬤ NO COIN ⬤ 1 PLAYER ⬤ KIM MXMD ⬤ PAC-MAN ⬤ HIGH SCORE ⬤ NO COIN ⬤ 1 PLAYER ⬤ KIM MXMD ⬤</span>
+    </div>
+</div>
+
+<!-- Neon title above machine -->
+<div class="arcade-title">
+    <h1>PAC-MAN</h1>
+</div>
+
+<!-- Your original arcade container — completely untouched -->
+<div id="arcade-container">
+    <img id="arcade-machine" src="./pacman_transparent.png" alt="Pac-Man Arcade Machine">
+    <canvas id="board" width="600" height="400"></canvas>
+</div>
+
+<!-- Insert coin prompt -->
+<div class="insert-coin">▶ FREE WEB ◀</div>
+
+<script src="pacman.js"></script>
+</body>
+</html>
