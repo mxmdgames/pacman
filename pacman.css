@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* =============================================
-   YOUR ORIGINAL STYLES — UNTOUCHED
-   ============================================= */
+
 
 body {
     margin: 0;
@@ -18,10 +16,27 @@ body {
     position: relative;
     width: 900px;
     max-width: 95vw;
-    /* On narrow screens the machine was shrinking too small relative to the
-       board. min-width keeps the machine large enough that the board's
-       percentage-based positioning always sits correctly inside it. */
     min-width: 340px;
+}
+
+/* On iPhone and other small phones the container was shrinking via 95vw
+   to a size where the machine image became too small for the board to fit
+   inside it. Force a larger fixed width at the breakpoints where this
+   happens so the machine and board always stay in proportion. */
+@media (max-width: 480px) {
+    #arcade-container {
+        width: 480px;
+        max-width: none;
+        min-width: 480px;
+    }
+}
+
+@media (max-width: 390px) {
+    #arcade-container {
+        width: 420px;
+        max-width: none;
+        min-width: 420px;
+    }
 }
 
 #arcade-machine {
@@ -40,14 +55,8 @@ body {
     z-index: 10;
 }
 
-@media (max-width: 400px) {
-    #board {
-        top: 15%;
-        left: 10%;
-        width: 80%;
-        height: 55%;
-    }
-}
+/* Board uses percentage positioning so it scales automatically with the
+   container — no override needed at small screen sizes. */
 
 /* =============================================
    80s ARCADE ATMOSPHERE — ADDED ON TOP
