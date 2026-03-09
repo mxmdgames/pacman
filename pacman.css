@@ -183,90 +183,96 @@ body {
    ============================================= */
 
 .dpad-container {
-    /* Hidden on desktop — show only when touch is likely */
     display: none;
     position: fixed;
-    bottom: 48px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1100;
-    /* Subtle backing plate so buttons don't float on busy backgrounds */
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(0, 220, 255, 0.18);
-    border-radius: 16px;
-    padding: 10px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 24px rgba(0, 220, 255, 0.15), 0 0 60px rgba(0, 220, 255, 0.06);
+    padding: 12px 12px 20px;
+    /* No background box — the cross shape IS the control */
 }
 
 /* Show d-pad on coarse-pointer devices (fingers) */
 @media (pointer: coarse) {
     .dpad-container { display: block; }
 
-    /* Push the insert-coin text up so it doesn't overlap the d-pad */
-    .insert-coin { bottom: 210px; }
+    /* Push insert-coin clear of the d-pad */
+    .insert-coin { display: none; }
 }
 
+/*
+   True cross layout using CSS Grid.
+   3 cols × 3 rows — corner cells are invisible dead zones.
+   Button size: 80px × 80px with a 3px gap → total footprint ~243 × 243px
+*/
 .dpad-grid {
     display: grid;
-    grid-template-columns: repeat(3, 60px);
-    grid-template-rows:    repeat(3, 60px);
-    gap: 4px;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows:    repeat(3, 80px);
+    gap: 3px;
 }
 
+/* Corner spacer cells — invisible, no pointer events */
 .dpad-cell {
-    /* Spacer cells at the four corners */
     background: transparent;
+    pointer-events: none;
 }
 
-/* The cross shape: darken the corner cells visually */
+/* Centre pip — purely decorative */
 .dpad-center {
-    background: rgba(0, 220, 255, 0.06);
-    border-radius: 4px;
+    background: rgba(255, 230, 0, 0.08);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
-/* ── Individual buttons ── */
+/* ── Individual direction buttons ── */
 .dpad-btn {
-    all: unset;                       /* reset browser button styles   */
+    all: unset;
     display: flex;
     align-items: center;
     justify-content: center;
 
     font-family: 'Press Start 2P', monospace;
-    font-size: 20px;
+    font-size: 26px;
     color: #FFE600;
-    text-shadow: 0 0 8px #FFE600, 0 0 18px #FFE600aa;
+    text-shadow: 0 0 8px #FFE600, 0 0 20px #FFE600aa;
 
-    background: rgba(0, 0, 0, 0.7);
-    border: 2px solid rgba(255, 230, 0, 0.45);
-    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.82);
+    border: 2px solid rgba(255, 230, 0, 0.5);
 
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-    touch-action: manipulation;       /* prevent double-tap zoom        */
+    touch-action: manipulation;
 
     transition:
-        background  0.07s ease,
-        border-color 0.07s ease,
-        box-shadow  0.07s ease,
-        transform   0.07s ease;
+        background   0.06s ease,
+        border-color 0.06s ease,
+        box-shadow   0.06s ease,
+        transform    0.06s ease;
 }
 
-/* Hover (desktop testing) */
+/* Give each arm of the cross a distinct silhouette */
+.dpad-up    { border-radius: 12px 12px 4px 4px;  }
+.dpad-down  { border-radius: 4px  4px  12px 12px; }
+.dpad-left  { border-radius: 12px 4px  4px  12px; }
+.dpad-right { border-radius: 4px  12px 12px 4px;  }
+
+/* Hover — desktop testing */
 .dpad-btn:hover {
-    background: rgba(255, 230, 0, 0.12);
+    background: rgba(255, 230, 0, 0.14);
     border-color: #FFE600;
-    box-shadow: 0 0 10px #FFE600, 0 0 24px #FFE600aa;
+    box-shadow: 0 0 12px #FFE600, 0 0 28px #FFE600aa;
 }
 
-/* Active / pressed state — triggered by JS class + :active */
+/* Pressed state */
 .dpad-btn:active,
 .dpad-btn.dpad-active {
-    background: rgba(255, 230, 0, 0.22);
+    background: rgba(255, 230, 0, 0.25);
     border-color: #FFE600;
-    box-shadow: 0 0 16px #FFE600, 0 0 36px #FFE600;
-    transform: scale(0.92);
+    box-shadow: 0 0 18px #FFE600, 0 0 40px #FFE600;
+    transform: scale(0.91);
     color: #fff;
-    text-shadow: 0 0 10px #fff, 0 0 24px #FFE600;
+    text-shadow: 0 0 10px #fff, 0 0 28px #FFE600;
 }
