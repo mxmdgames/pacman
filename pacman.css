@@ -175,3 +175,98 @@ body {
     pointer-events: none;
     z-index: -1;
 }
+
+/* =============================================
+   MOBILE D-PAD CONTROLS
+   Only rendered on touch / small screens.
+   Styled to match the existing arcade neon theme.
+   ============================================= */
+
+.dpad-container {
+    /* Hidden on desktop — show only when touch is likely */
+    display: none;
+    position: fixed;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1100;
+    /* Subtle backing plate so buttons don't float on busy backgrounds */
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(0, 220, 255, 0.18);
+    border-radius: 16px;
+    padding: 10px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 24px rgba(0, 220, 255, 0.15), 0 0 60px rgba(0, 220, 255, 0.06);
+}
+
+/* Show d-pad on coarse-pointer devices (fingers) */
+@media (pointer: coarse) {
+    .dpad-container { display: block; }
+
+    /* Push the insert-coin text up so it doesn't overlap the d-pad */
+    .insert-coin { bottom: 210px; }
+}
+
+.dpad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows:    repeat(3, 60px);
+    gap: 4px;
+}
+
+.dpad-cell {
+    /* Spacer cells at the four corners */
+    background: transparent;
+}
+
+/* The cross shape: darken the corner cells visually */
+.dpad-center {
+    background: rgba(0, 220, 255, 0.06);
+    border-radius: 4px;
+}
+
+/* ── Individual buttons ── */
+.dpad-btn {
+    all: unset;                       /* reset browser button styles   */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Press Start 2P', monospace;
+    font-size: 20px;
+    color: #FFE600;
+    text-shadow: 0 0 8px #FFE600, 0 0 18px #FFE600aa;
+
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 230, 0, 0.45);
+    border-radius: 8px;
+
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;       /* prevent double-tap zoom        */
+
+    transition:
+        background  0.07s ease,
+        border-color 0.07s ease,
+        box-shadow  0.07s ease,
+        transform   0.07s ease;
+}
+
+/* Hover (desktop testing) */
+.dpad-btn:hover {
+    background: rgba(255, 230, 0, 0.12);
+    border-color: #FFE600;
+    box-shadow: 0 0 10px #FFE600, 0 0 24px #FFE600aa;
+}
+
+/* Active / pressed state — triggered by JS class + :active */
+.dpad-btn:active,
+.dpad-btn.dpad-active {
+    background: rgba(255, 230, 0, 0.22);
+    border-color: #FFE600;
+    box-shadow: 0 0 16px #FFE600, 0 0 36px #FFE600;
+    transform: scale(0.92);
+    color: #fff;
+    text-shadow: 0 0 10px #fff, 0 0 24px #FFE600;
+}
